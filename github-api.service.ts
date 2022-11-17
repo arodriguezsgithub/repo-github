@@ -10,7 +10,7 @@ export interface Project {
 }
 
 const octokit = new Octokit({
-  auth: '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'
+  auth: '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'
 });
 
 @Injectable({
