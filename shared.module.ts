@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedLibraryService } from './shared-library.service';
+import { GithubApiService } from './github-api.service';
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import { SharedLibraryService } from './shared-library.service';
   exports: [
   ],
   providers: [
-    SharedLibraryService
+    GithubApiService
   ]
 })
 export class SharedLibraryModule { }
