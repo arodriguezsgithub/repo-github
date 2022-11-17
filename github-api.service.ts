@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Octokit } from "octokit";
 import { Observable, from } from 'rxjs';
-import { environment } from 'src/environments/environment';
 
 export interface Project {
   name: string;
@@ -11,7 +10,7 @@ export interface Project {
 }
 
 const octokit = new Octokit({
-  auth: environment.gitHubApi
+  auth: atob('Z2l0aHViX3BhdF8xMUFRWTQzQ0Ewd1NmOUpTNkpBN0tiX0RJSVJXdFdyTmtpY0ZzQUVLZ3lUdnZCVVJ3N0VOUU8wZ1hzRzI3Wmc5d05RN0tDMlRLQ3ZlSVIwaEZD')
 });
 
 @Injectable({
@@ -23,7 +22,6 @@ export class GithubApiService {
 
   private async fetchUserProjects(username: string): Promise<any>{
     try {
-
       const result = await octokit.request('GET /users/{username}/repos', {
         username: username
       });
