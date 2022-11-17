@@ -9,10 +9,6 @@ export interface Project {
   id: number;
 }
 
-const octokit = new Octokit({
-  auth: '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'
-});
-
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +18,11 @@ export class GithubApiService {
 
   private async fetchUserProjects(username: string): Promise<any>{
     try {
+
+      const octokit = new Octokit({
+        auth: ''
+      });
+
       const result = await octokit.request('GET /users/{username}/repos', {
         username: username
       });
