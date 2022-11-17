@@ -35,7 +35,7 @@ export class GithubApiService {
     }
   }
 
-  getUserProjects(username: string): Observable<any>{
+  getUserProjects$(username: string): Observable<any>{
     return from(this.fetchUserProjects(username));
   }
 }
