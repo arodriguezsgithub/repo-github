@@ -9,6 +9,14 @@ export interface Project {
   id: number;
 }
 
+export interface User {
+  login: string;
+  url: string;
+  created_at: string;
+  avatar_url: string;
+  id: number;
+}
+
 const octokit = new Octokit({
   auth: atob('Z2l0aHViX3BhdF8xMUFRWTQzQ0Ewd1NmOUpTNkpBN0tiX0RJSVJXdFdyTmtpY0ZzQUVLZ3lUdnZCVVJ3N0VOUU8wZ1hzRzI3Wmc5d05RN0tDMlRLQ3ZlSVIwaEZD')
 });
@@ -63,12 +71,37 @@ export class GithubApiService {
     }
   }
 
+  private async fetchUser(username: string): Promise<any>{
+    try {
+      const result = await octokit.request('GET /users/{username}', {
+        username: username
+      });
+
+      const user: User = {
+        login: result.data.login,
+        url: result.data.url,
+        created_at: result.data.created_at,
+        avatar_url: result.data.avatar_url,
+        id: result.data.id,
+      }
+        
+      return user;
+  
+    } catch (error: any) {
+      return new Error(error);
+    }
+  }
+
   getUserProjects$(username: string): Observable<Project[]>{
     return from(this.fetchUserProjects(username));
   }
 
   getProject$(username: string, reponame: string): Observable<Project>{
     return from(this.fetchProject(username, reponame));
+  }
+
+  getUser$(username: string): Observable<User>{
+    return from(this.fetchUser(username));
   }
   
 }
